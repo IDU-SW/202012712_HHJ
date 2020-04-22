@@ -32,7 +32,7 @@ Temporary Items
 
 ### Node ###
 
-node_modules
+/node_modules/
 
 # Logs
 logs
