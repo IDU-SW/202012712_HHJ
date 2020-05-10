@@ -1,5 +1,3 @@
-var pool = require('./dbConnection');
-
 const mysql = require('mysql2');
 
 const dbConfig = {
