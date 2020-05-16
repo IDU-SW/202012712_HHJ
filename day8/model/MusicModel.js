@@ -46,16 +46,16 @@ class Music {
     }
 
     getMusicDetail = async(musicId) => {
-        const sql = 'SELECT * from musics where id = ?';
+        const sql = 'SELECT * from musics where id = id';
         let conn;
         try {
             conn = await pool.getConnection();
-            const [rows, metadata] = await conn.query(sql, gameId);
+            const [rows, metadata] = await conn.query(sql, musicId);
             conn.release();
             console.log(rows);
             return rows[0];
-        } catch (error) {
-            console.error(error);
+        } catch (errorgi) {
+            console.error('실패 : ', error);
         } finally {
             if ( conn ) conn.release();
         }

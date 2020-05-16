@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const musics = require('../model/MusicModel');
 
+router.get('/musics', async (req, res) => {
+    const data = await musics.getMusicList();
+    
+    res.render('musics', {musics:data, count:data.length});
+});
+
 router.get('/musics', showMusicList);
 router.get('/musics/:musicId', showMusicDetail);
 router.post('/musics', addMusic);
@@ -9,22 +15,17 @@ router.get('/music/add',addMusicForm);
 
 module.exports = router;
 
-router.get('/musics', async (req, res) => {
-    const data = await musics.getMusicList();
-    
-    res.render('musics', {musics:data, count:data.length});
-});
-
 async function showMusicList(req, res) {
     try {
         // 영화 상세 정보 Id
         const musicId = req.params.musicId;
-        const info = await games.getMusicDetail(musicId);
+        const info = await musics.getMusicDetail(musicId);
 
         res.render('musicsdetail', {detail:info});
     }
     catch ( error ) {
-        console.log('Can not find, 404');
+        console.error('연결 실패', error);
+        //console.log('Can not find, 404');
         res.status(error.code).send({msg:error.msg});
     }
 }
