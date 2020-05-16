@@ -12,7 +12,7 @@ module.exports = router;
 router.get('/musics', async (req, res) => {
     const data = await musics.getMusicList();
     
-    res.render('musics', {phonegames:data, count:data.length});
+    res.render('musics', {musics:data, count:data.length});
 });
 
 async function showMusicList(req, res) {

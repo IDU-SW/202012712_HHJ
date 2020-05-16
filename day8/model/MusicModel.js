@@ -1,3 +1,5 @@
+var pool = require('./dbConnection');
+
 const fs = require('fs');
 
 class Music {
