@@ -3,41 +3,41 @@ const fs = require('fs');
 class Music {
     constructor() {
         const data = fs.readFileSync('./model/data.json');
-        this.music = JSON.parse(data)
+        this.musics = JSON.parse(data)
     }
 
     // Promise 예제
     getMusicList() {
-        if (this.music) {
-            return this.music;
+        if (this.musics) {
+            return this.musics;
         }
         else {
             return [];
         }
     }
 
-    addMusic(title, singer, introduction) {
+    addMusic(title, singer, infomation) {
         return new Promise((resolve, reject) => {
-            let last = this.music[this.music.length - 1];
+            let last = this.musics[this.musics.length - 1];
             let id = last.id + 1;
 
-            let newMusic = {id, title, singer, introduction};
-            this.music.push(newMusic);
+            let newMusic = {id, title, singer, infomation};
+            this.musics.push(newMusic);
 
-            resolve(nerMusic);
+            resolve(newMusic);
         });
     }
 
     // Promise - Reject
     getMusicDetail(musicId) {
         return new Promise((resolve, reject) => {
-            for (var music of this.music ) {
+            for (var music of this.musics ) {
                 if ( music.id == musicId ) {
                     resolve(music);
                     return;
                 }
             }
-            reject({msg:'Can not find Music', code:404});
+            reject({msg:'Can not find music', code:404});
         });
     }
 }
