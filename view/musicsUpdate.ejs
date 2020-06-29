@@ -1,0 +1,22 @@
+  
+<html>
+    <head>
+       <meta charset="UTF-8" />
+        <title>Musics</title>
+    </head>
+    <body>
+        <h1><%= detail.title %> 수정하기</h1> 
+        <form action="/musics/edit" method="POST" >
+            <input type="hidden" name="id" value="<%= detail.id %>">
+    <pre>
+    제목  : <input type="text" name="title"" value="<%= detail.title %>" style="width:200px;"></br>
+    가수  : <input type="text" name="singer" value="<%= detail.singer %>"style="width:200px;"></br>
+    설명  : <input type="text" name="introduction" value="<%= detail.introduction %>" style="width:600px;">
+    
+    <p>
+    <input type="submit" value="수정">  <input type="button" value="돌아가기" onclick="history.back(-1)">
+    </p>
+    </pre>
+        </form> 
+    </body>
+    </html>

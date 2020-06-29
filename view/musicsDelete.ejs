@@ -1,0 +1,23 @@
+<html>
+<head>
+   <meta charset="UTF-8" />
+    <title>FOOD</title>
+</head>
+<body>
+    <h1>상세설명</h1>
+    
+    노래제목 : <%= detail.title%>    </br>
+    
+    가수 : <%= detail.singer %>    </br>
+    설명 : <%= detail.introduction %>   </br>
+    
+    </br>
+
+    <form name="detail" method="post" action="/musics/delete">
+        <input type="hidden" name="id" value="<%= detail.id %>">
+        <input type="button" value="수정" onclick="location.href='/musics/detail/<%= detail.id %>'">&nbsp;
+        <input type="submit" value="삭제">
+        <input type="button" value="돌아가기" onclick="history.back(-1)">
+    </form>  
+</body>
+</html>

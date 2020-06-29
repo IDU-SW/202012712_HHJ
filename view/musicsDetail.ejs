@@ -1,0 +1,21 @@
+<html>
+<head>
+   <meta charset="UTF-8" />
+</head>
+<body>
+    <h1><%= detail.title %> 상세보기</h1>
+    <ul>
+        <li>title : <%= detail.title %>  </li>
+        <li>singer : <%= detail.singer %>  </li>
+        <li>introduction : <%= detail.introduction %>  </li>
+    </ul>
+    <form name="detail" method="post" action="/musics/delete">
+        <input type="hidden" name="id" value="<%= detail.id %>">
+        <input type="submit" value="삭제">
+    </form>
+        <button type="button"><a href="/musics/detail/<%= detail.id%>">수정</a></button>
+
+    
+    
+</body>
+</html>

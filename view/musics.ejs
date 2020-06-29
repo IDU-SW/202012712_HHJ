@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>음악 추천</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <div class="jumbotron text-center mb-0">
+        <h1>추천 음악 리스트</h1>
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> <a href="#" class="navbar-brand">MENU</a>
+        <!-- Toggle Button --> 
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a onclick="location.href='/music/add'" class="nav-link">NEW</a></li>
+                <li class="nav-item" id="loginform">
+                    <input type="text" id="userId" placeholder="User ID">
+                    <input type="password" id="userPw" placeholder="Password">
+                    <input type="button" onclick="login()" value="로그인">
+                    <input type="button" onclick="logout()" value="로그아웃">
+                </li>               
+            </ul>
+        </div>
+    </nav>
+    <!-- content -->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 2%;">No</th>
+            <th style="width: 10%;">제목</th>
+            <th style="width: 10.5%;">가수</th>
+            <th class="text-center">앨범 소개</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% musics.forEach(function(item) { %>   
+          <tr>
+            <td><a href='/musics/<%= item.id %>'><%= item.id %></td>
+            <td><%= item.title %></td>
+            <td><%= item.singer %></td>
+            <td><%= item.introduction %></td>
+          </tr>
+        <% }) %>
+        </tbody>
+      </table>
+    <!-- footer -->
+    <div class="jumbotron text-center mt-5 mb-0">
+        <h3 class="text-secondary">Musics </h3>
+        <p>made by <span class="text-primary">hyeonju</span></p> 
+    </div>
+
+    <!-- script -->
+    <script>
+      $(document).ready(function () {
+         console.log('ready!');
+      });
+      function login() {
+         var id = $("#userId").val();
+         var pw = $("#userPw").val();
+
+         $.ajax({
+            url: '/login',
+            type: 'post',
+            data: `id=${id}&password=${pw}`
+         }).done((data) => {
+            // 로그인 성공
+            alert('로그인 성공');
+            $("#login-result").text(data);
+            $("#tagID").show(); 
+            $("#tag_sub").hide();  
+         }).fail((err) => {
+            // 로그인 실패            
+            alert('로그인 실패');
+            $("#login-result").text(err.statusText);
+         });
+      }
+
+      function logout() {
+         $.ajax({
+            url: '/logout',
+            type: 'delete'
+         }).done((data) => {
+            // 로그아웃 성공
+            $("#login-result").text("로그아웃 성공");  
+         }).fail((err) => {
+            // 로그아웃 실패            
+            $("#login-result").text("로그아웃 실패");
+         });
+      }
+        
+      </script>
+</body>
+</html>
